@@ -1,1 +1,6 @@
 .env
+venv
+groupinfo.json
+Never_gonna_give_you_up.mp3
+*.session*
+*.mp3
