@@ -4,12 +4,15 @@ import pytgcalls
 import pyrogram
 from dotenv import load_dotenv
 
+load_dotenv()
+
 API_HASH = os.getenv('API_HASH')
 API_ID = os.getenv('API_ID')
 CHAT_ID = os.getenv('CHAT_ID')
 INPUT_FILENAME = "Never_gonna_give_you_up.mp3" # maybe replace  
 OUTPUT_FILENAME = "rick_roll.mp3"              # with env
 SESSION = os.getenv('SESSION')
+
 CLIENT_TYPE = pytgcalls.GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM
 async def main(client):
     await client.start()
