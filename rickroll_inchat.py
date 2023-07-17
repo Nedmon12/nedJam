@@ -13,6 +13,27 @@ INPUT_FILENAME = "Never_gonna_give_you_up.mp3" # maybe replace
 OUTPUT_FILENAME = "rick_roll.mp3"              # with env
 SESSION = os.getenv('SESSION')
 
+playlist = {}
+
+def populatePlaylist():
+    #value songList read from db
+    """
+     {
+      song: {
+       title: "",
+       filepath: "",
+      },
+      metadata: {
+      duration: "",
+      artist: "",
+      album: "",
+      }
+     }
+    """
+    songList = []
+    for song in songList:
+        playlist.append
+
 CLIENT_TYPE = pytgcalls.GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM
 async def main(client):
     await client.start()
