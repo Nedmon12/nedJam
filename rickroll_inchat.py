@@ -3,7 +3,8 @@ import asyncio
 import pytgcalls
 import pyrogram
 from dotenv import load_dotenv
-
+import ffmpeg
+import json
 load_dotenv()
 
 API_HASH = os.getenv('API_HASH')
@@ -12,6 +13,10 @@ CHAT_ID = os.getenv('CHAT_ID')
 INPUT_FILENAME = "Never_gonna_give_you_up.mp3" # maybe replace  
 OUTPUT_FILENAME = "rick_roll.mp3"              # with env
 SESSION = os.getenv('SESSION')
+
+
+with open("songlist.json", "r")as file:
+    songList = json.load(file)
 
 playlist = {}
 
@@ -30,9 +35,20 @@ def populatePlaylist():
       }
      }
     """
-    songList = []
+    
     for song in songList:
-        playlist.append
+        playlist[song.title] = song.filepath
+
+def convertFileToRaw(filepath):
+    # result = subprocess.run(["ffpmeg"], ["-i"], ["filepath"])
+    input_filename = 'input.raw'
+    ffmpeg.input(filepath).output(
+        input_filename,
+        format='s16le',
+        acodec='pcm_s16le',
+        ac=2,
+        ar='48k'
+    ).overwrite_output().run()
 
 CLIENT_TYPE = pytgcalls.GroupCallFactory.MTPROTO_CLIENT_TYPE.PYROGRAM
 async def main(client):

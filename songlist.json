@@ -1,0 +1,32 @@
+[   
+ {
+    "title":"LA devotee",
+    "filepath":"./songs/ladevotee.mp3",
+
+    "metadata": {
+        "duration": "196",
+        "artist": "Panic at the disco",
+        "album": "Death of a bachelor"
+    }
+},
+{
+    "title": "Never gonna give you up",
+    "filepath": "./songs/rick_roll.mp3",
+    
+    "metadata": {
+        "duration": "214",
+        "artist": "Rick Atsley",
+        "album": "Whenever you need somebody"
+    }
+},
+{
+    "title": "Save your Tears",
+    "filepath": "./songs/save_your_tears.mp3",
+
+    "metadata": {
+        "duration": "215",
+        "artist": "The Weekend",
+        "album": "After hours"
+    }
+}
+]
