@@ -56,8 +56,9 @@ async def main(client):
     while not client.is_connected:
         await asyncio.sleep(1)
 
+    convertFileToRaw(INPUT_FILENAME)
     group_call = pytgcalls.GroupCallFactory(client, CLIENT_TYPE)\
-        .get_file_group_call(INPUT_FILENAME, OUTPUT_FILENAME)
+        .get_file_group_call('input.raw', OUTPUT_FILENAME)
     
     await group_call.start(int(CHAT_ID))
 
