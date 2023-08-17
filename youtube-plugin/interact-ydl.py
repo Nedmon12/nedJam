@@ -1,17 +1,12 @@
 import subprocess
-
-def downloadByTitle(title):
-    process = subprocess.Popen([], #youtube-dl command goes here
-                               stdout=subprocess.PIPE,
-                               stderr=subprocess.PIPE)
-    process.communicate() #I am not sure :p
+import youtube_dl
+# def downloadByTitle(title):
+    
 
 
 def downloadLink(ytlink):
-    result = subprocess.run(["youtube-dl"], ["ytlink"])  #tune with parameters
+    ydl_opts = {}
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([ytlink])
 
-
-        #this is just a placeholder idk what youtube-dl returns yet
-    if (result=="success"):
-        #add song title and file location tuple to db
         
