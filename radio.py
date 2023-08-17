@@ -4,7 +4,7 @@ from pytgcalls import GroupCallFactory
 import pyrogram
 from pyrogram import filters
 from dotenv import load_dotenv
-
+from .search import youtube_search
 load_dotenv()
 
 API_HASH = os.getenv('API_HASH')
@@ -19,8 +19,11 @@ app = pyrogram.Client(SESSION, int(API_ID), API_HASH)
 # parse message.text
 @app.on_message(filters.command("play"))
 async def handler(client, message):
-    print(message.text)
-    results = YouTube.Search.List()
+    result = youtube_search({'q':message.text,'maxResults':5})
+
+    # if (result):
+        # download results
+        # 
 
 app.run()
 
