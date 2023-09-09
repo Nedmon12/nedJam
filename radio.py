@@ -5,7 +5,11 @@ import pyrogram
 from pyrogram import filters
 from dotenv import load_dotenv
 from .search import youtube_search
+from .download import downloadLink
+import redis
 load_dotenv()
+
+r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
 API_HASH = os.getenv('API_HASH')
 API_ID = os.getenv('API_ID')
@@ -20,7 +24,8 @@ app = pyrogram.Client(SESSION, int(API_ID), API_HASH)
 @app.on_message(filters.command("play"))
 async def handler(client, message):
     result = youtube_search({'q':message.text,'maxResults':5})
-
+    downloadFile = downloadLink(result[1])
+    # r.hset(result)
     # if (result):
         # download results
         # 
