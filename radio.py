@@ -1,39 +1,42 @@
 import os
+
 import ffmpeg
+from pyrogram import Client, filters
+from pyrogram.types import Message
+import download
+import search
+
 from pytgcalls import GroupCallFactory
-import pyrogram
-from pyrogram import filters
-from dotenv import load_dotenv
-from .search import youtube_search
-from .download import downloadLink
-import redis
-load_dotenv()
 
-r = redis.Redis(host='localhost', port=6379, decode_responses=True)
+main_filter = filters.text & filters.outgoing & ~filters.edited
+cmd_filter = lambda cmd: filters.command(cmd, prefixes='!')
 
-API_HASH = os.getenv('API_HASH')
-API_ID = os.getenv('API_ID')
-CHAT_ID = os.getenv('CHAT_ID')
-INPUT_FILENAME = "Never_gonna_give_you_up.mp3" # maybe replace  
-OUTPUT_FILENAME = "rick_roll.mp3"              # with env
-SESSION = os.getenv('SESSION')
+group_call = None
 
-app = pyrogram.Client(SESSION, int(API_ID), API_HASH)
+def init_client_and_delete_message(func):
+    async def wrapper (client, message):
+        global group_call
+        if not group_call:
+            group_call = GroupCallFactory(client).get_file_group_call()
 
-# parse message.text
-@app.on_message(filters.command("play"))
-async def handler(client, message):
-    result = youtube_search({'q':message.text,'maxResults':5})
-    downloadFile = downloadLink(result[1])
-    # r.hset(result)
-    # if (result):
-        # download results
-        # 
+        await message.delete()
 
-app.run()
-
-
-# def main():
-#     main_client = pyrogram.Client(SESSION,
-#                                   int(API_ID), API_HASH)
+        return await func(client, message)
     
+    return wrapper
+
+@Client.on_message(main_filer & cmd_filter('play'))
+async def start_playout(_, message: Message):
+    if not message.reply_to_message or not message.reply_to_message.audio:
+        return await message.delete()
+    
+    if not group_call:
+        return await message.reply_text('You are not in a voice chat')
+    
+    input_filename = 'input.raw'
+
+    status = '-....\n'
+    await message.edit_text(status)
+    print(f"this is message.text {message.text}")
+    audio_original = await download.sendTitleandId(search.sendTitleandId(message.text))
+    print(audio_original)

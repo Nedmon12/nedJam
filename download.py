@@ -1,6 +1,7 @@
 import youtube_dl
+import asyncio
 
-def downloadLink(link):
+async def downloadLink(link):
     ydl_opts = {
         'format': 'bestaudio/best',
         'postprocessors': [{
@@ -13,6 +14,6 @@ def downloadLink(link):
     mystring = f"https://www.youtube.com/watch?v={link}"
     print(mystring)
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([mystring])
-
+       donwloadable = await ydl.download([mystring])
+    return (donwloadable)
     # youtube_dl.YoutubeDL.download()
