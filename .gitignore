@@ -7,3 +7,4 @@ Never_gonna_give_you_up.mp3
 *.raw
 songs
 *.pyc
+__pycache__
