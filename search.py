@@ -68,7 +68,7 @@ def sendTitleandId(searchString,options):
             if(leVideoCount==0):
                 leVideo = (search_result['snippet']['title'], search_result['id']['videoId'])
                 print(leVideo)
-                return search_result['id']['videoId']
+                return leVideo
         elif search_result['id']['kind'] == 'youtube#channel':
             print("\n ________\skipping because search result is a channel")
         elif search_result['id']['kind'] == 'youtube#playlist':
