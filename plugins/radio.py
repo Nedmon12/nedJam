@@ -63,8 +63,11 @@ async def start_playout(client, message: Message):
     # await message.edit_text(status)
     print(f"this is message.text {message.text}")
     temp = message.text.split()[1]
-    print(temp)
-    options = {'q':temp, 'part':'id,snippet', 'max_results':5}
+    words = message.text.split()
+    result_string = ' '.join(words[1:])
+    print(result_string)
+    # print(temp)
+    options = {'q':result_string, 'part':'id,snippet', 'max_results':5}
 
     print(options['q'])
     # audio_original = await search.sendTitleandId(message.text, options)
